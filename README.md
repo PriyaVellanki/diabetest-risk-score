@@ -4,6 +4,7 @@
 
 The outline of the project is to predict whether a patient is prone to risk of a heart attack or not, using different health parameters.
 
+
 ## About the Dataset
  
 The Diabetes prediction dataset is a collection of medical and demographic data from patients, along with their diabetes status (positive or negative). The data includes features such as age, gender, body mass index (BMI), hypertension, heart disease, smoking history, HbA1c level, and blood glucose level. This dataset can be used to build machine learning models to predict diabetes in patients based on their medical history and demographic information. This can be useful for healthcare professionals in identifying patients who may be at risk of developing diabetes and in developing personalized treatment plans. Additionally, the dataset can be used by researchers to explore the relationships between various medical and demographic factors and the likelihood of developing diabetes.
@@ -104,6 +105,8 @@ brew install kubectl
 ```python
 minikube start
 ```
+![](https://user-images.githubusercontent.com/36514922/281518330-5853874d-ea4a-4c35-83f7-3bd1a86c74a6.png)
+
 ### To user docker daemon inside minikube
 ```python
 eval $(minikube docker-env)
@@ -136,8 +139,11 @@ Alternatively, use kubectl to forward the port:
 ```python
 kubectl port-forward service/flask-api 7080:9696
 ```
+![](https://user-images.githubusercontent.com/36514922/281518174-718a8268-f511-41a6-948d-3760b61d39e7.png)
+
 ### Test using minikube endpoint 
 
+![](https://user-images.githubusercontent.com/36514922/281518254-1745f1b6-2053-4dc6-93f6-e455950677a9.png)
 
 ### Manage your Cluster
 Pause Kubernetes without impacting deployed applications:
@@ -158,6 +164,9 @@ minikube stop
 ## Acknowledgement
 
 The project has been created as part of ML ZOOMCAMP with the help of a colaborative slack community of DataTalks and specially Alexey.
+
+## Notes
+Trained model on Logistic, Decision Tree , Random Forest and XGBoost. Though XGBoost is have very slightly high score than random forest. Not getting right predictions when I test locally with different test data. The data I choose as host of class Imbalance. Added class_weight to correct the balance but still need to explore why XGBoost is not predicting right always even with high AUC score.
 
 ## Feedback
 
