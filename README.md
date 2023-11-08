@@ -81,6 +81,80 @@ Locally, user shoudl be able to get a similar output to the one shown below upon
 
 ![](https://user-images.githubusercontent.com/36514922/281501596-f29725d2-cd80-41cb-9428-847c318426ed.png)
 
+## Cloud Deployment
+
+### Prerequisites
+CPU : 2 or more
+Container or virtual machine manager such as Docker,Virtual Box etc
+
+###Installation
+Install instructions for various platforms are located here :
+Below steps I listed on for Mac.
+
+```python
+brew install minikube
+```
+
+```python
+brew install kubectl
+```
+
+### Start your Cluster
+
+```python
+minikube start
+```
+### To user docker daemon inside minikube
+```python
+eval $(minikube docker-env)
+```
+### Build docker images inside minikube
+```python
+ minikube cache add python:3.10-slim
+ docker build -t diabetest-risk-score .
+```
+### Deploy Application
+Create deployment and Expose it on port 9696. 
+```python
+kubectl create -f deployment.yaml 
+  kubectl expose deployment flaskapi-deployment --type=NodePort --port=9696
+```
+I took sample deployment.yaml for FlaskAPI and updated with my image.
+Alternatively, you can use image to create deployment. Below are the details.
+```python
+kubectl create deployment flask-api --image=diabetest-risk-score:latest
+kubectl expose deployment flask-api --type=NodePort --port=9696
+```
+### Access the Service Endpoint
+
+The easiest way to access this service is to let minikube launch a web browser for you:
+```python
+minikube service flask-api
+```
+
+Alternatively, use kubectl to forward the port:
+```python
+kubectl port-forward service/flask-api 7080:9696
+```
+### Test using minikube endpoint 
+
+
+### Manage your Cluster
+Pause Kubernetes without impacting deployed applications:
+```python
+minikube pause
+```
+
+Unpause a paused instance:
+```python
+minikube unpause
+```
+Halt the cluster:
+
+```python
+minikube stop
+```
+
 ## Acknowledgement
 
 The project has been created as part of ML ZOOMCAMP with the help of a colaborative slack community of DataTalks and specially Alexey.
