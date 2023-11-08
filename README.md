@@ -24,7 +24,8 @@ docker
 First and foremost, the repo needs to cloned to local for usage. This can be achieved using:
 
 ```python
-git clone
+git clone https://github.com/PriyaVellanki/diabetest-risk-score.git
+```
 
 ### Acquiring Data
 
@@ -32,78 +33,53 @@ The data used for training this model is stored in `/data/diabetes_prediction_da
 
 ### Using Docker Image
 
+Build Docker Image
+
 ```
 docker build -t {build-tag} .
 ```
+Run the docker image
 
 ```
 docker run -it --rm -p 9696:9696 {build-tag}
 ```
 
+
 `{build-tag}`: Specifies any user-defined tag for docker image. eg. `diabetes-risk-score:latest `
 
 ### Making predictions
 
-By default, the patient parameters are set at:
+By default, the patient parameters are set at the following for test service:
 
 ```
-    "gender": "male", 
-    "diabetes": "yes", 
-    "family_history": "yes", 
-    "smoking": "yes", 
-    "obesity": "yes", 
-    "alcohol_consumption": "yes", 
-    "diet": "unhealthy", 
-    "previous_heart_problems": "yes", 
-    "medication_use": "yes", 
-    "country": "united_states", 
-    "age": 75, 
-    "cholesterol": 360, 
-    "heart_rate": 85, 
-    "exercise_hours_per_week": 8, 
-    "stress_level": 10, 
-    "sedentary_hours_per_day": 4.987731820348275, 
-    "income": 181290, 
-    "bmi": 38, 
-    "triglycerides": 369, 
-    "physical_activity_days_per_week": 2, 
-    "sleep_hours_per_day": 3, 
-    "systolic_bp": 200, 
-    "diastolic_bp": 130
+  patient = {
+    "gender":"male",
+    "age":50,
+    "hypertension": 0,
+    "heart_disease": 0,
+    "smoking_history": "current",
+    "bmi": 25.31,
+    "hba1c_level":7.0,
+    "blood_glucose_level":220
+}
 ```
-User may change the parameters to test out different scenarios by changing values or parameters in `predict-test.py`
 
-#### Allowed parameters for features (with restrictions):
-
-- gender: male/female
-- diabetes - yes/no
-- family_history - yes/no
-- smoking - yes/no
-- obesity - yes/no
-- alcohol_consumption - none/light/moderate/heavy
-- diet - healthy/average/unhealthy
-- previous_heart_problems - yes/no
-- medication_use - yes/no
-- stress_level - 1-10
-- sedentary_hours_per_day - 0-24
-- physical_activity_days_per_week - 0-7
-- sleep_hours_per_day - 0-24
-- country - One of ['Argentina', 'Nigeria', 'Thailand', 'Spain', 'Germany', 'France',
-       'South Africa', 'Colombia', 'Italy', 'China', 'Vietnam',
-       'United States', 'Japan', 'Canada', 'India', 'United Kingdom',
-       'New Zealand', 'Brazil', 'South Korea', 'Australia']
-
-Once, user is happy with patient input, predictions can be made in a new console window inside the project folder.
+To test the model with specific input and check the prediction probablity value.
 
 ```python
-python predict-test.py
+python predict_test_using_model.py
+```
+To test the model using API endpoint either after starting gunicorn loclaly or after docker deployment.
+
+```python
+python test_predict_api.py
 ```
 
 ## Sample Output
 
 Locally, user shoudl be able to get a similar output to the one shown below upon running all steps successfully.
 
-![sample_output](output.JPG)
+
 
 ## Acknowledgement
 
