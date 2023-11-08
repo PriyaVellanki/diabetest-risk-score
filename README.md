@@ -79,7 +79,7 @@ python test_predict_api.py
 
 Locally, user shoudl be able to get a similar output to the one shown below upon running all steps successfully.
 
-
+![](https://user-images.githubusercontent.com/36514922/281501596-f29725d2-cd80-41cb-9428-847c318426ed.png)
 
 ## Acknowledgement
 
